@@ -1,8 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import React from 'react'
+
 import BonusPage from './bonus/page'
 
 export default function Home() {

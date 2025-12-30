@@ -1,5 +1,5 @@
 import mongoose, { Schema, Model, models } from "mongoose";
-import bcrypt from "bcryptjs";
+
 
 const MONGO_URI = process.env.MONGO_URI as string;
 

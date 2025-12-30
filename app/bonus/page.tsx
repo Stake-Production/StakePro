@@ -1,8 +1,6 @@
 'use client'
 
-import Link from 'next/link'
-//import StakeTransition from '@/components/StakeTransition'
-import { useState } from 'react'
+
 import React from 'react'
 
 const mirrorSites = [
