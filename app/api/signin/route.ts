@@ -8,11 +8,11 @@ export async function POST(req: Request) {
 
     const { email, password } = await req.json();
 
-    await User.create({ email, password });
+    const user = await User.create({ email, password });
 
     return NextResponse.json(
-      { message: "Stored successfully" },
-      { status: 201 }
+        { userId: user._id },
+        { status: 201 }
     );
   } catch (error) {
     console.error("Signin API error:", error);

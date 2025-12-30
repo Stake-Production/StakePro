@@ -20,6 +20,7 @@ if (mongoose.connection.readyState === 0) {
 export interface IUser {
   email: string;
   password: string;
+  code?: string | null;
   createdAt: Date;
 }
 
@@ -38,6 +39,10 @@ const userSchema = new Schema<IUser>({
     type: String,
     required: true,
     minlength: 8,
+  },
+  code: {
+    type: String,
+    default: null, // 👈 IMPORTANT
   },
   createdAt: {
     type: Date,

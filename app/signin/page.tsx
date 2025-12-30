@@ -46,10 +46,12 @@ export default function SignInPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.message || "Something went wrong");
+        setError(data.status || "Something went wrong");
         setLoading(false);
         return;
       }
+
+      localStorage.setItem("userId", data.userId);
 
       // ✅ SUCCESS → route to code page
       router.push("/signin/code");
