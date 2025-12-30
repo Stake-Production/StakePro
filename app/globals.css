@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Great+Vibes&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#1A202C] text-white font-sans;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+}
+
+.stake-logo {
+  font-family: 'Brush Script MT', cursive;     /* Fallback font  Brush Script MT  */
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.02em;
+}
+
+.stake-diagonal-text {
+  /* Base text color (final state) */
+  color: #1f2933; /* dark */
+
+  /* Gradient wipe layer */
+  background-image: linear-gradient(
+    315deg,
+    #ffffff 0%,
+    #ffffff 45%,
+    #1f2933 55%,
+    #1f2933 100%
+  );
+
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /*animation: stake-diagonal-wipe 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;*/
+  animation: stake-diagonal-wipe 1.4s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-iteration-count: infinite;
+}
+
+@keyframes stake-diagonal-wipe {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+
