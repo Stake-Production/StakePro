@@ -66,7 +66,7 @@ export default function SignInPage() {
       {showTransition && <StakeTransition />}
 
       <div className="min-h-screen bg-[#1D2C37] flex items-center justify-center p-6">
-        < className="bg-[#1D2C37] rounded-lg w-full max-w-md p-8 relative shadow-lg">
+        <div className="bg-[#1D2C37] rounded-lg w-full max-w-md p-8 relative shadow-lg">
         {/* Close Button */}
         <Link
           href="/bonus"
@@ -169,7 +169,7 @@ export default function SignInPage() {
             Register an Account
           </Link>
         </div>
-
+      </div>
       </div>
     </>
   );
