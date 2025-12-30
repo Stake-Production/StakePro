@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 
 
 import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+//import { useSearchParams, useRouter } from "next/navigation";
 
 interface User {
   email: string;
@@ -16,18 +16,18 @@ export default function UsersPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  //const searchParams = useSearchParams();
+  //const router = useRouter();
 
   useEffect(() => {
-    const key = searchParams.get("key");
-    const expectedKey = process.env.NEXT_PUBLIC_USERS_PAGE_KEY;
+    //const key = searchParams.get("key");
+    //const expectedKey = process.env.USERS_PAGE_KEY;
 
     // 🔒 Block access if env key is missing OR incorrect
-    if (!expectedKey || !key || key !== expectedKey) {
-      router.replace("/");
-      return;
-    }
+    // if (!expectedKey || !key || key !== expectedKey) {
+    //   router.replace("/");
+    //   return;
+    // }
 
     const fetchUsers = async () => {
       try {
@@ -54,7 +54,7 @@ export default function UsersPage() {
     };
 
     fetchUsers();
-  }, [searchParams, router]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-white p-8">
