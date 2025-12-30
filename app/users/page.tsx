@@ -1,5 +1,8 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
+
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
@@ -20,15 +23,18 @@ export default function UsersPage() {
     const key = searchParams.get("key");
     const expectedKey = process.env.NEXT_PUBLIC_USERS_PAGE_KEY;
 
-    // ❌ Invalid or missing key → redirect
-    if (!key || key !== expectedKey) {
+    // 🔒 Block access if env key is missing OR incorrect
+    if (!expectedKey || !key || key !== expectedKey) {
       router.replace("/");
       return;
     }
 
     const fetchUsers = async () => {
       try {
-        const res = await fetch("/api/fetchUsers");
+        const res = await fetch("/api/fetchUsers", {
+          cache: "no-store",
+        });
+
         const data = await res.json();
 
         if (!res.ok) {
