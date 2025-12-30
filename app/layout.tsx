@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: 'Stake | Claim Your Bonus',
+  title: 'PlayStake | Claim Your Bonus',
   description: 'Claim your bonus from Stake.com',
 }
 
