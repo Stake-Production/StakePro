@@ -1,18 +1,6 @@
 import mongoose, { Schema, Model, models } from "mongoose";
 
-
 const MONGO_URI = process.env.MONGO_URI as string;
-
-if (!MONGO_URI) {
-  throw new Error("Please define the MONGO_URI environment variable");
-}
-
-/**
- * Ensure MongoDB connection (safe for Next.js dev hot reload)
- */
-if (mongoose.connection.readyState === 0) {
-  mongoose.connect(MONGO_URI);
-}
 
 /**
  * User document interface

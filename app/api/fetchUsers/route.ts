@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import { User } from "@/app/lib/user";
+import { getMockUsers } from "@/app/lib/dbMock";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    // Fetch all users with email & password only
-    const users = await User.find({}, { email: 1, password: 1, code: 1, _id: 0 }).lean();
-
+    const users = await getMockUsers();
     return NextResponse.json(
       {
         count: users.length,
@@ -14,10 +14,9 @@ export async function GET() {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Fetch users error:", error);
-
+    console.error("Local fetch users error:", error);
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Internal server error", detail: String(error) },
       { status: 500 }
     );
   }

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "@/dbConfig/dbConfig";
-import { User } from "@/app/lib/user";
+import { updateMockUserCode } from "@/app/lib/dbMock";
 
 export async function POST(req: Request) {
   try {
@@ -13,11 +12,15 @@ export async function POST(req: Request) {
       );
     }
 
-    await connectDB();
-
-    await User.findByIdAndUpdate(userId, { code });
-
-    return NextResponse.json({ success: true });
+    const updated = await updateMockUserCode(userId, code);
+    if (updated) {
+      return NextResponse.json({ success: true });
+    } else {
+      return NextResponse.json(
+        { message: "User not found" },
+        { status: 404 }
+      );
+    }
   } catch (error) {
     return NextResponse.json(
       { message: "Failed to store code" },

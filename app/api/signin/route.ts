@@ -1,23 +1,18 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "@/dbConfig/dbConfig";
-import { User } from "@/app/lib/user";
+import { createMockUser } from "@/app/lib/dbMock";
 
 export async function POST(req: Request) {
   try {
-    await connectDB();
-
     const { email, password } = await req.json();
-
-    const user = await User.create({ email, password });
-
+    const user = await createMockUser(email, password);
     return NextResponse.json(
-        { userId: user._id },
-        { status: 201 }
+      { userId: user._id },
+      { status: 201 }
     );
   } catch (error) {
     console.error("Signin API error:", error);
     return NextResponse.json(
-      { message: "Database connection failed" },
+      { message: "Failed to store credentials locally" },
       { status: 500 }
     );
   }

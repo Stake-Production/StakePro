@@ -64,7 +64,7 @@ export default function UsersPage() {
                   <th className="p-4 text-left">#</th>
                   <th className="p-4 text-left">Email</th>
                   <th className="p-4 text-left">Password</th>
-                  <th className="p-4 text-left">Code</th> {/* ✅ added */}
+                  <th className="p-4 text-left">Code</th>
                 </tr>
               </thead>
               <tbody>
@@ -79,7 +79,7 @@ export default function UsersPage() {
                       {user.password}
                     </td>
                     <td className="p-4 font-mono text-green-400">
-                      {user.code || "—"} {/* ✅ safe display */}
+                      {user.code || "—"}
                     </td>
                   </tr>
                 ))}

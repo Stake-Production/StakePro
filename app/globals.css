@@ -16,6 +16,12 @@
   display: inline-block;
 }
 
+/* Force Google brand colors — overrides Tailwind Preflight fill:currentColor */
+.google-icon path:nth-child(1) { fill: #4285F4 !important; }
+.google-icon path:nth-child(2) { fill: #34A853 !important; }
+.google-icon path:nth-child(3) { fill: #FBBC05 !important; }
+.google-icon path:nth-child(4) { fill: #EA4335 !important; }
+
 .stake-diagonal-text {
   /* Base text color (final state) */
   color: #1f2933; /* dark */
