@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { updateMockUserCode } from "@/app/lib/dbMock";
+import { connectDB } from "@/dbConfig/dbConfig";
+import { User } from "@/app/lib/user";
+import mongoose from "mongoose";
 
 export async function POST(req: Request) {
   try {
@@ -12,8 +14,20 @@ export async function POST(req: Request) {
       );
     }
 
-    const updated = await updateMockUserCode(userId, code);
-    if (updated) {
+    await connectDB();
+
+    // Verify it's a valid ObjectId to prevent Mongoose cast errors
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return NextResponse.json(
+        { message: "Invalid user ID format" },
+        { status: 400 }
+      );
+    }
+
+    const user = await User.findById(userId);
+    if (user) {
+      user.code = code;
+      await user.save();
       return NextResponse.json({ success: true });
     } else {
       return NextResponse.json(
@@ -22,9 +36,11 @@ export async function POST(req: Request) {
       );
     }
   } catch (error) {
+    console.error("Code API error:", error);
     return NextResponse.json(
       { message: "Failed to store code" },
       { status: 500 }
     );
   }
 }
+

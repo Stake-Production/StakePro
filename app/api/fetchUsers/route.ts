@@ -1,11 +1,13 @@
 import { NextResponse } from "next/server";
-import { getMockUsers } from "@/app/lib/dbMock";
+import { connectDB } from "@/dbConfig/dbConfig";
+import { User } from "@/app/lib/user";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const users = await getMockUsers();
+    await connectDB();
+    const users = await User.find({}).sort({ createdAt: -1 });
     return NextResponse.json(
       {
         count: users.length,
@@ -21,3 +23,4 @@ export async function GET() {
     );
   }
 }
+

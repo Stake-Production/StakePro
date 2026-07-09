@@ -1,6 +1,15 @@
 import mongoose from "mongoose";
+import dns from "dns";
+
+// Fix querySrv ENOTFOUND error on local networks that have issues resolving DNS SRV records
+try {
+  dns.setServers(["8.8.8.8", "1.1.1.1"]);
+} catch (err) {
+  console.warn("Could not set custom DNS servers:", err);
+}
 
 const MONGO_URI = process.env.MONGO_URI as string;
+
 
 if (!MONGO_URI) {
   throw new Error("MONGO_URI not defined");
